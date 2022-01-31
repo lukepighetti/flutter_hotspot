@@ -75,11 +75,11 @@ class HotspotProvider extends StatefulWidget {
   /// Listens for [HotspotTarget]s and provides a scrim with highlighting hotspot
   /// and overlay callout with actions for going to the next [HotspotTarget].
   const HotspotProvider({
-    Key key,
-    @required this.actionBuilder,
-    @required this.child,
-    @required this.curve,
-    @required this.color,
+    Key? key,
+    required this.actionBuilder,
+    required this.child,
+    required this.color,
+    this.curve = Curves.easeOutQuint,
     this.duration = const Duration(milliseconds: 750),
     this.padding = const EdgeInsets.all(16),
     this.tailInsets = const EdgeInsets.all(4),
@@ -160,7 +160,7 @@ class HotspotProviderState extends State<HotspotProvider>
   /// When we start the flow we save the last focus node, dismiss
   /// focus to close the keyboard, and after the tour is done we
   /// put the focus back where it was.
-  FocusNode _lastFocusNode;
+  FocusNode? _lastFocusNode;
 
   /// Convenience getter for the current flow sorted by order.
   List<HotspotTargetState> get currentFlow =>
@@ -169,11 +169,9 @@ class HotspotProviderState extends State<HotspotProvider>
 
   /// Initiate a hotspot flow
   void startFlow([String flow = 'main']) {
-    // print('starting flow $flow');
-
     /// Dismiss keyboard if open
     _lastFocusNode = FocusManager.instance.primaryFocus;
-    _lastFocusNode.unfocus();
+    _lastFocusNode?.unfocus();
 
     _pruneUnmountedTargets();
 
@@ -300,9 +298,9 @@ class HotspotProviderState extends State<HotspotProvider>
 
   /// Build the hotspot and callout
   Widget buildHotspotAndCallout({
-    @required BuildContext context,
-    @required CalloutLayoutDelegate delegate,
-    @required HotspotTargetState currentTarget,
+    required BuildContext context,
+    required CalloutLayoutDelegate delegate,
+    required HotspotTargetState currentTarget,
   }) {
     return Stack(
       children: [
@@ -314,14 +312,14 @@ class HotspotProviderState extends State<HotspotProvider>
                     dismiss();
                   }
                 : null,
-            child: TweenAnimationBuilder<Rect>(
+            child: TweenAnimationBuilder<Rect?>(
               curve: widget.curve,
               tween: RectTween(end: delegate.hotspotBounds),
               duration: widget.duration,
               builder: (context, t, child) {
                 return CustomPaint(
                   painter: HotspotPainter(
-                    hotspotBounds: t,
+                    hotspotBounds: t!,
                     shapeBorder: widget.hotspotShapeBorder,
                     skrimColor: widget.skrimColor,
                   ),
@@ -336,7 +334,7 @@ class HotspotProviderState extends State<HotspotProvider>
           child: Stack(
             children: [
               /// Callout tail
-              TweenAnimationBuilder<Rect>(
+              TweenAnimationBuilder<Rect?>(
                 curve: widget.curve,
                 duration: widget.duration,
                 tween: RectTween(
@@ -345,7 +343,7 @@ class HotspotProviderState extends State<HotspotProvider>
                 builder: (context, t, child) {
                   return CustomPaint(
                     painter: CalloutTailPainter(
-                      tailBounds: t,
+                      tailBounds: t!,
                       color: widget.color,
                     ),
                   );
@@ -353,7 +351,7 @@ class HotspotProviderState extends State<HotspotProvider>
               ),
 
               /// Callout body
-              TweenAnimationBuilder<Rect>(
+              TweenAnimationBuilder<Rect?>(
                 curve: widget.curve,
                 duration: widget.duration,
                 tween: RectTween(
@@ -361,7 +359,7 @@ class HotspotProviderState extends State<HotspotProvider>
                 ),
                 builder: (context, t, child) {
                   return Positioned.fromRect(
-                    rect: t,
+                    rect: t!,
                     child: AnimatedContainer(
                       curve: widget.curve,
                       duration: widget.duration,
@@ -386,7 +384,6 @@ class HotspotProviderState extends State<HotspotProvider>
                               Padding(
                                 padding: widget.bodyPadding,
                                 child: AnimatedSize(
-                                  vsync: this,
                                   duration: widget.duration,
                                   alignment: Alignment.topCenter,
                                   curve: widget.curve,
@@ -430,11 +427,11 @@ class CalloutActionController {
   /// A stateless controller that passes events back to [HotspotProvider]
   /// while providing key metrics to the builder.
   CalloutActionController({
-    @required this.dismiss,
-    @required this.next,
-    @required this.previous,
-    @required this.index,
-    @required this.pages,
+    required this.dismiss,
+    required this.next,
+    required this.previous,
+    required this.index,
+    required this.pages,
   });
 
   /// Dismiss the callout.

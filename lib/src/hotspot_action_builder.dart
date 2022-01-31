@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'hotspot_provider.dart';
 
@@ -24,7 +23,7 @@ class HotspotActionBuilder extends StatelessWidget {
           /// Back / end tour button
           Opacity(
             opacity: 0.5,
-            child: OutlinedButton(
+            child: TextButton(
               child: Text(controller.isFirstPage ? 'End tour' : 'Previous'),
               onPressed: () {
                 controller.previous();

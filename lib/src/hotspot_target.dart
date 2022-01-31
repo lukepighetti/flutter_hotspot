@@ -68,11 +68,11 @@ class HotspotTarget extends StatefulWidget {
   /// Tags a widget to be located, highlighted and called out
   /// as part of a hotspot flow.
   const HotspotTarget({
-    Key key,
+    Key? key,
     this.flow = 'main',
-    @required this.calloutBody,
-    @required this.order,
-    @required this.child,
+    required this.calloutBody,
+    required this.order,
+    required this.child,
     this.hotspotSize,
     this.hotspotOffset = Offset.zero,
   }) : super(key: key);
@@ -97,7 +97,7 @@ class HotspotTarget extends StatefulWidget {
   final Widget child;
 
   /// Override the hotspot dimensions with a custom size.
-  final Size hotspotSize;
+  final Size? hotspotSize;
 
   /// Override the hotspot center with a custom offset.
   final Offset hotspotOffset;

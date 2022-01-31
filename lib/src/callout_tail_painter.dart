@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 class CalloutTailPainter extends CustomPainter {
   /// Paints the callout tail for [HotspotProvider] based on a [Rect] bounds
   CalloutTailPainter({
-    @required this.tailBounds,
-    @required this.color,
+    required this.tailBounds,
+    required this.color,
   });
 
   /// The bounding rectangle of the callout tail.

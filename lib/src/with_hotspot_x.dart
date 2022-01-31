@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'hotspot_target.dart';
 
@@ -7,11 +6,11 @@ extension WithHotspotX on Widget {
   /// Wrap this widget with a branded [HotspotTarget]
   Widget withHotspot({
     String flow = 'main',
-    @required num order,
-    @required String title,
-    @required String text,
-    Widget icon,
-    Size hotspotSize,
+    required num order,
+    required String title,
+    required String text,
+    Widget? icon,
+    Size? hotspotSize,
     Offset hotspotOffset = Offset.zero,
   }) {
     return Builder(
@@ -38,7 +37,7 @@ extension WithHotspotX on Widget {
                     if (title.isNotEmpty)
                       Text(
                         title,
-                        style: theme.textTheme.subtitle1
+                        style: theme.textTheme.subtitle1!
                             .copyWith(fontWeight: FontWeight.w600),
                       ),
                     if (title.isNotEmpty && text.isNotEmpty)

@@ -4,15 +4,15 @@ class CalloutLayoutDelegate {
   /// Handles all the layout for the hotspot, callout tail,
   /// and callout body positions.
   CalloutLayoutDelegate({
-    @required this.paintBounds,
-    @required this.targetBounds,
-    @required this.hotspotPadding,
-    @required this.tailSize,
-    @required this.tailInsets,
-    @required this.bodyMargin,
-    @required this.bodyWidth,
-    @required this.hotspotSize,
-    @required this.hotspotOffset,
+    required this.paintBounds,
+    required this.targetBounds,
+    required this.hotspotPadding,
+    required this.tailSize,
+    required this.tailInsets,
+    required this.bodyMargin,
+    required this.bodyWidth,
+    required this.hotspotSize,
+    required this.hotspotOffset,
   });
 
   /// The boundary of the viewport where targets will be found.
@@ -37,7 +37,7 @@ class CalloutLayoutDelegate {
   final double bodyWidth;
 
   /// `Nullable.` A custom size for the hotspot.
-  final Size hotspotSize;
+  final Size? hotspotSize;
 
   /// A custom offset for the hotspot center.
   final Offset hotspotOffset;
@@ -51,8 +51,8 @@ class CalloutLayoutDelegate {
             hotspotOffset.dx,
             hotspotOffset.dy,
           ),
-          width: hotspotSize.width,
-          height: hotspotSize.height,
+          width: hotspotSize!.width,
+          height: hotspotSize!.height,
         ),
       );
     } else {

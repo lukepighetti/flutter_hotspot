@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 class HotspotPainter extends CustomPainter {
   /// Paints a skrim with an empty hotspot
   HotspotPainter({
-    @required this.hotspotBounds,
-    @required this.skrimColor,
-    @required this.shapeBorder,
+    required this.hotspotBounds,
+    required this.skrimColor,
+    required this.shapeBorder,
   });
 
   /// The target to highlight with a hotspot.
