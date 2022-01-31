@@ -1,14 +1,25 @@
 # hotspot
 
-A new Flutter package project.
+An interactivity & developer experience experiment for building easy tours.
 
-## Getting Started
+Extensions look like callouts. Common tour flows look like callouts. So let's use them both so the code looks like the tours.
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+```dart
+class Example extends StatelessWidget {
+  const Example({Key? key}) : super(key: key);
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.play_arrow),
+      onPressed: () {
+        HotspotProvider.of(context).startFlow();
+      },
+    ).withHotspot(
+      order: 1,
+      title: 'Tour It!',
+      text: 'This is the first callout in the tour!',
+    );
+  }
+}
+```
