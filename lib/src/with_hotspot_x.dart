@@ -37,7 +37,7 @@ extension WithHotspotX on Widget {
                     if (title.isNotEmpty)
                       Text(
                         title,
-                        style: theme.textTheme.subtitle1!
+                        style: theme.textTheme.titleMedium!
                             .copyWith(fontWeight: FontWeight.w600),
                       ),
                     if (title.isNotEmpty && text.isNotEmpty)
@@ -47,7 +47,7 @@ extension WithHotspotX on Widget {
                     if (text.isNotEmpty)
                       Text(
                         text,
-                        style: theme.textTheme.bodyText2,
+                        style: theme.textTheme.bodyMedium,
                       ),
                   ],
                 ),

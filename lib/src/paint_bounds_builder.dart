@@ -18,7 +18,7 @@ class _PaintBoundsBuilderState extends State<PaintBoundsBuilder> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _paintBounds ??= (context.findRenderObject() as RenderBox).paintBounds;
       });

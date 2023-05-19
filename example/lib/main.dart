@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         actionBuilder: (context, controller) =>
             HotspotActionBuilder(controller),
         color: Colors.white,
-        child: const MyHomePage(title: 'Flutter Demo Home Page'),
+        child: const MyHomePage(title: 'Hotspot Demo Home Page'),
       ),
     );
   }
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       HotspotProvider.of(context).startFlow();
     });
 
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ).withHotspot(
               order: 2,
               title: 'Count It!',
