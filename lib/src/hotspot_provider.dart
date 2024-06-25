@@ -79,19 +79,20 @@ class HotspotProvider extends StatefulWidget {
     Key? key,
     this.actionBuilder,
     required this.child,
-    required this.color,
+    this.backgroundColor,
+    this.foregroundColor,
     this.curve = Curves.easeOutQuint,
     this.duration = const Duration(milliseconds: 750),
     this.padding = const EdgeInsets.all(16),
-    this.tailInsets = const EdgeInsets.all(4),
+    this.tailInsets = const EdgeInsets.all(-2),
     this.tailSize = const Size(14, 8),
     this.bodyMargin = const EdgeInsets.all(8),
     this.bodyWidth = 322,
-    this.skrimColor = Colors.black54,
+    this.skrimColor,
     this.hotspotShapeBorder = const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16))),
     this.bodyPadding = const EdgeInsets.all(16),
-    this.dismissibleSkrim = false,
+    this.dismissibleSkrim = true,
     this.skrimCurve = Curves.easeOutExpo,
   }) : super(key: key);
 
@@ -117,7 +118,10 @@ class HotspotProvider extends StatefulWidget {
   final EdgeInsets bodyMargin;
 
   /// The color of the callout body and tail.
-  final Color color;
+  final Color? backgroundColor;
+
+  /// The color of text and icons.
+  final Color? foregroundColor;
 
   /// The width of the callout body;
   final double bodyWidth;
@@ -125,7 +129,7 @@ class HotspotProvider extends StatefulWidget {
   /// The color of the skrim which acts as the background
   /// between the hotspot callout and the view. Provides
   /// hotspot cutouts that surround the appropriate [HotspotTarget].
-  final Color skrimColor;
+  final Color? skrimColor;
 
   /// The shape of the hotspot border.
   final ShapeBorder hotspotShapeBorder;
@@ -238,6 +242,12 @@ class HotspotProviderState extends State<HotspotProvider>
     _pruneUnmountedTargets();
   }
 
+  Color get bg =>
+      widget.backgroundColor ?? Theme.of(context).colorScheme.surfaceBright;
+
+  Color get fg =>
+      widget.foregroundColor ?? Theme.of(context).colorScheme.onSurface;
+
   @override
   Widget build(BuildContext context) {
     /// Update this index manually to transition between targets
@@ -325,7 +335,8 @@ class HotspotProviderState extends State<HotspotProvider>
                   painter: HotspotPainter(
                     hotspotBounds: t!,
                     shapeBorder: widget.hotspotShapeBorder,
-                    skrimColor: widget.skrimColor,
+                    skrimColor: widget.skrimColor ??
+                        Theme.of(context).colorScheme.scrim.withOpacity(0.4),
                   ),
                 );
               },
@@ -348,7 +359,7 @@ class HotspotProviderState extends State<HotspotProvider>
                   return CustomPaint(
                     painter: CalloutTailPainter(
                       tailBounds: t!,
-                      color: widget.color,
+                      color: bg,
                     ),
                   );
                 },
@@ -378,9 +389,7 @@ class HotspotProviderState extends State<HotspotProvider>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
-                          decoration: BoxDecoration(
-                            color: widget.color,
-                          ),
+                          decoration: BoxDecoration(color: bg),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -404,6 +413,7 @@ class HotspotProviderState extends State<HotspotProvider>
                                   previous: previous,
                                   index: _index,
                                   pages: currentFlow.length,
+                                  foregroundColor: fg,
                                 ),
                               ),
                             ],
@@ -436,7 +446,10 @@ class CalloutActionController {
     required this.previous,
     required this.index,
     required this.pages,
+    required this.foregroundColor,
   });
+
+  final Color? foregroundColor;
 
   /// Dismiss the callout.
   final VoidCallback dismiss;

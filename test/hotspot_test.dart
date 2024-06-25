@@ -79,7 +79,7 @@ class HotspotTestScreen extends StatelessWidget {
       bodyWidth: 322,
       dismissibleSkrim: true,
       curve: Curves.easeInOut,
-      color: Colors.purple,
+      backgroundColor: Colors.purple,
       bodyPadding: EdgeInsets.all(24),
       skrimColor: Colors.black54,
       hotspotShapeBorder: RoundedRectangleBorder(

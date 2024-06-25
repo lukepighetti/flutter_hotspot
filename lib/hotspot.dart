@@ -1,7 +1,7 @@
 /// Getting started with the `hotspot` tour guide feature:
 ///
 /// 1. put [HotspotProvider] at the top of your widget tree
-/// 2. give it an actionBuilder for controls
+/// 2. OPTIONAL: give it an actionBuilder for controls
 /// 3. annotate widgets to highlight and explain with [HotspotTarget]
 /// 4. call `HotspotProvider.of(context).startFlow()`
 ///

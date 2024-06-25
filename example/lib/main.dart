@@ -14,10 +14,14 @@ class MyApp extends StatelessWidget {
       title: 'hotspot',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+        colorSchemeSeed: Colors.purple,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        colorSchemeSeed: Colors.purple,
       ),
       home: const HotspotProvider(
-        color: Colors.white,
         child: MyHomePage(title: 'Hotspot Demo Home Page'),
       ),
     );

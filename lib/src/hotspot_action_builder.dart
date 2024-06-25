@@ -13,6 +13,8 @@ class HotspotActionBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fg = controller.foregroundColor;
+
     return Padding(
       padding: EdgeInsets.only(bottom: 10) +
           EdgeInsets.symmetric(
@@ -21,14 +23,11 @@ class HotspotActionBuilder extends StatelessWidget {
       child: Row(
         children: [
           /// Back / end tour button
-          Opacity(
-            opacity: 0.5,
-            child: TextButton(
-              child: Text(controller.isFirstPage ? 'End tour' : 'Previous'),
-              onPressed: () {
-                controller.previous();
-              },
-            ),
+          TextButton(
+            child: Text(controller.isFirstPage ? 'End tour' : 'Previous'),
+            onPressed: () {
+              controller.previous();
+            },
           ),
 
           /// The number of hotspots indicator. It will auto-scale its size to fit if
@@ -45,10 +44,9 @@ class HotspotActionBuilder extends StatelessWidget {
                       duration: _duration,
                       curve: _curve,
                       decoration: BoxDecoration(
-                        color: controller.index == i
-                            ? Colors.white
-                            : Colors.white30,
-                        borderRadius: BorderRadius.circular(99),
+                        shape: BoxShape.circle,
+                        color:
+                            controller.index == i ? fg : fg?.withOpacity(0.3),
                       ),
                       height: 6,
                       width: 6,
@@ -63,7 +61,7 @@ class HotspotActionBuilder extends StatelessWidget {
           /// Next / done button.
           ConstrainedBox(
             constraints: BoxConstraints(minWidth: 82),
-            child: ElevatedButton(
+            child: FilledButton(
               child: Text(controller.isLastPage ? 'Done' : 'Next'),
               onPressed: () {
                 controller.next();

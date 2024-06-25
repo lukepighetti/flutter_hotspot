@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.1.0] - June 25, 2024
 
-* TODO: Describe initial release.
+- Announcing the initial release of `hotspot`, the simplest way to make beautiful tours, coachmarks, and tutorials.

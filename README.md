@@ -1,10 +1,28 @@
 # hotspot
 
-An interactivity & developer experience experiment for building easy tours.
+The simplest way to make beautiful tours, coachmarks, and tutorials.
 
 https://user-images.githubusercontent.com/666539/151731298-1a1c01c6-8784-4394-b271-ceaf04ab7027.mp4
 
-Extensions look like callouts. Common tour flows look like callouts. So let's use them both so the code looks like the tours.
+
+Wrap your app, screen, or view with `HotspotProvider`
+
+```dart
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const HotspotProvider(
+      child: Scaffold(
+        body: // ...
+      ),
+    );
+  }
+}
+```
+
+Add hotspot callouts to your widget tree
 
 ```dart
 class Example extends StatelessWidget {
@@ -15,7 +33,7 @@ class Example extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.play_arrow),
       onPressed: () {
-        HotspotProvider.of(context).startFlow();
+        // ...
       },
     ).withHotspot(
       order: 1,
@@ -24,4 +42,10 @@ class Example extends StatelessWidget {
     );
   }
 }
+```
+
+Start a flow
+
+```dart
+HotspotProvider.of(context).startFlow()
 ```
