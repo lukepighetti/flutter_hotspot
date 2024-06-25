@@ -1,6 +1,7 @@
 name: hotspot
 description: Simple tours, coachmarks, and tutorials
 version: 0.1.0
+repository: https://github.com/lukepighetti/flutter_hotspot
 
 environment:
   sdk: ">=3.4.3 <4.0.0"

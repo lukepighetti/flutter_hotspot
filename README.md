@@ -2,8 +2,7 @@
 
 The simplest way to make beautiful tours, coachmarks, and tutorials.
 
-https://user-images.githubusercontent.com/666539/151731298-1a1c01c6-8784-4394-b271-ceaf04ab7027.mp4
-
+<img alt="demo of under, critically, and over damped Flutter curves" src="https://raw.githubusercontent.com/lukepighetti/flutter_hotspot/master/doc/demo.gif" width="400">
 
 Wrap your app, screen, or view with `HotspotProvider`
 
