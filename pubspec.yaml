@@ -1,6 +1,6 @@
 name: hotspot
 description: Simple tours, coachmarks, and tutorials. Just tag your Widgets!
-version: 0.1.1
+version: 0.1.3
 repository: https://github.com/lukepighetti/flutter_hotspot
 
 environment:
