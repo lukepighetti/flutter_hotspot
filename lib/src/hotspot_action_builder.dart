@@ -16,56 +16,59 @@ class HotspotActionBuilder extends StatelessWidget {
     final fg = controller.foregroundColor;
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 10) +
+      padding: EdgeInsets.only(bottom: 12) +
           EdgeInsets.symmetric(
-            horizontal: 10,
+            horizontal: 12,
           ),
       child: Row(
         children: [
           /// Back / end tour button
-          TextButton(
-            child: Text(controller.isFirstPage ? 'End tour' : 'Previous'),
-            onPressed: () {
-              controller.previous();
-            },
-          ),
-
-          /// The number of hotspots indicator. It will auto-scale its size to fit if
-          /// it has too many items to fit horizontally.
           Expanded(
-            flex: 4,
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Row(
-                children: [
-                  for (var i = 0; i < controller.pages; i++)
-                    AnimatedContainer(
-                      margin: EdgeInsets.all(3),
-                      duration: _duration,
-                      curve: _curve,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color:
-                            controller.index == i ? fg : fg?.withOpacity(0.3),
-                      ),
-                      height: 6,
-                      width: 6,
-                    ),
-                ],
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                child: Text(
+                  controller.isFirstPage ? 'End tour' : 'Previous',
+                  maxLines: 2,
+                ),
+                onPressed: () {
+                  controller.previous();
+                },
               ),
             ),
           ),
 
-          SizedBox(width: 18),
+          Row(
+            children: [
+              for (var i = 0; i < controller.pages; i++)
+                AnimatedContainer(
+                  margin: EdgeInsets.all(3),
+                  duration: _duration,
+                  curve: _curve,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: controller.index == i ? fg : fg?.withOpacity(0.3),
+                  ),
+                  height: 6,
+                  width: 6,
+                ),
+            ],
+          ),
 
           /// Next / done button.
-          ConstrainedBox(
-            constraints: BoxConstraints(minWidth: 82),
-            child: FilledButton(
-              child: Text(controller.isLastPage ? 'Done' : 'Next'),
-              onPressed: () {
-                controller.next();
-              },
+          Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: FilledButton(
+                child: Text(
+                  controller.isLastPage ? 'Done' : 'Next',
+                  maxLines: 2,
+                ),
+                onPressed: () {
+                  controller.next();
+                },
+              ),
             ),
           ),
         ],

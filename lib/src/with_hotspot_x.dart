@@ -21,6 +21,7 @@ extension WithHotspotX on Widget {
           flow: flow,
           hotspotSize: hotspotSize,
           hotspotOffset: hotspotOffset,
+          order: order,
           calloutBody: Row(
             children: [
               if (icon != null) ...[
@@ -42,7 +43,7 @@ extension WithHotspotX on Widget {
                       ),
                     if (title.isNotEmpty && text.isNotEmpty)
                       SizedBox(
-                        height: 12,
+                        height: 6,
                       ),
                     if (text.isNotEmpty)
                       Text(
@@ -54,7 +55,6 @@ extension WithHotspotX on Widget {
               ),
             ],
           ),
-          order: order,
           child: this,
         );
       },
