@@ -140,6 +140,8 @@ class HotspotProvider extends StatefulWidget {
   final EdgeInsets bodyPadding;
 
   /// The actions to build at the bottom of the callout body.
+  ///
+  /// Localize the default by constructing [HotspotActionBuilder] with new strings
   final CalloutActionBuilder? actionBuilder;
 
   /// Tapping on the skrim dismisses the flow when `true`.

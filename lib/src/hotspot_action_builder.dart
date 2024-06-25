@@ -4,9 +4,20 @@ import 'hotspot_provider.dart';
 
 class HotspotActionBuilder extends StatelessWidget {
   /// Used on all hotspots, builds the buttons and item indicator.
-  HotspotActionBuilder(this.controller);
+  HotspotActionBuilder(
+    this.controller, {
+    this.doneText = "Done",
+    this.nextText = "Next",
+    this.previousText = "Previous",
+    this.endText = "End tour",
+  });
 
   final CalloutActionController controller;
+
+  final String doneText;
+  final String nextText;
+  final String previousText;
+  final String endText;
 
   final _duration = const Duration(milliseconds: 250);
   final _curve = Curves.easeOutCirc;
@@ -28,7 +39,7 @@ class HotspotActionBuilder extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: TextButton(
                 child: Text(
-                  controller.isFirstPage ? 'End tour' : 'Previous',
+                  controller.isFirstPage ? endText : previousText,
                   maxLines: 2,
                 ),
                 onPressed: () {
@@ -65,7 +76,7 @@ class HotspotActionBuilder extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: FilledButton(
                 child: Text(
-                  controller.isLastPage ? 'Done' : 'Next',
+                  controller.isLastPage ? doneText : nextText,
                   maxLines: 2,
                 ),
                 onPressed: () {
