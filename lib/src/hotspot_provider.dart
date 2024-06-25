@@ -6,7 +6,6 @@ import 'callout_layout_delegate.dart';
 import 'callout_tail_painter.dart';
 import 'hotspot_notification.dart';
 import 'hotspot_painter.dart';
-import 'hotspot_target.dart';
 import 'paint_bounds_builder.dart';
 
 /// Example of a typical HotspotProvider with actionBuilder handling the
@@ -73,6 +72,9 @@ import 'paint_bounds_builder.dart';
 /// )
 /// ```
 class HotspotProvider extends StatefulWidget {
+  /// Set this to `false` to disable logging
+  static var log = true;
+
   /// Listens for [HotspotTarget]s and provides a scrim with highlighting hotspot
   /// and overlay callout with actions for going to the next [HotspotTarget].
   const HotspotProvider({
@@ -187,11 +189,14 @@ class HotspotProviderState extends State<HotspotProvider>
       _flow = flow;
       _index = 0;
 
-      if (currentFlow.length == 0)
-        print('[Hotspot] warning, flow dispatched, '
-            'but no hotspots found. flow: $flow');
-      else
+      if (currentFlow.isEmpty) {
+        if (HotspotProvider.log) {
+          debugPrint('[Hotspot] warning, flow dispatched, '
+              'but no hotspots found. flow: $flow');
+        }
+      } else {
         _visible = true;
+      }
     });
   }
 
