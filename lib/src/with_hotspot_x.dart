@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'hotspot_target.dart';
+import 'package:hotspot/hotspot.dart';
 
 extension WithHotspotX on Widget {
   /// Wrap this widget with a branded [HotspotTarget]
@@ -16,6 +15,7 @@ extension WithHotspotX on Widget {
     return Builder(
       builder: (context) {
         final theme = Theme.of(context);
+        final fg = HotspotProvider.of(context).fg;
 
         return HotspotTarget(
           flow: flow,
@@ -25,7 +25,7 @@ extension WithHotspotX on Widget {
             children: [
               if (icon != null) ...[
                 IconTheme(
-                  data: IconThemeData(color: Colors.white),
+                  data: IconThemeData(color: fg),
                   child: icon,
                 ),
                 SizedBox(width: 16),

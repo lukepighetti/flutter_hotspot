@@ -72,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ).withHotspot(
             order: 4,
+            icon: const Icon(Icons.play_arrow),
             title: 'Tour It!',
             text: 'Want to see the tour again? Tap this button',
           ),
