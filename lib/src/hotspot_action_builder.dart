@@ -38,22 +38,25 @@ class HotspotActionBuilder extends StatelessWidget {
             ),
           ),
 
-          Row(
-            children: [
-              for (var i = 0; i < controller.pages; i++)
-                AnimatedContainer(
-                  margin: EdgeInsets.all(3),
-                  duration: _duration,
-                  curve: _curve,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: controller.index == i ? fg : fg?.withOpacity(0.3),
+          if (controller.pages > 5)
+            Text("${controller.index + 1}/${controller.pages}")
+          else
+            Row(
+              children: [
+                for (var i = 0; i < controller.pages; i++)
+                  AnimatedContainer(
+                    margin: EdgeInsets.all(3),
+                    duration: _duration,
+                    curve: _curve,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: controller.index == i ? fg : fg?.withOpacity(0.3),
+                    ),
+                    height: 6,
+                    width: 6,
                   ),
-                  height: 6,
-                  width: 6,
-                ),
-            ],
-          ),
+              ],
+            ),
 
           /// Next / done button.
           Expanded(
