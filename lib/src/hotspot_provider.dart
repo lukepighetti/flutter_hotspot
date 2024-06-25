@@ -235,6 +235,9 @@ class HotspotProviderState extends State<HotspotProvider>
     /// have a previously-saved focus node.
     _lastFocusNode?.requestFocus();
     _lastFocusNode = null;
+
+    /// don't animate to first tag on subsequent flow runs
+    Future.delayed(widget.duration, () => setState(() => _index = 0));
   }
 
   /// Removes all targets that are not mounted
