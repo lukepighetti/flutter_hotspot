@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotspot/hotspot.dart';
 import 'package:provider/provider.dart';
 
 import 'callout_layout_delegate.dart';
@@ -76,7 +77,7 @@ class HotspotProvider extends StatefulWidget {
   /// and overlay callout with actions for going to the next [HotspotTarget].
   const HotspotProvider({
     Key? key,
-    required this.actionBuilder,
+    this.actionBuilder,
     required this.child,
     required this.color,
     this.curve = Curves.easeOutQuint,
@@ -133,7 +134,7 @@ class HotspotProvider extends StatefulWidget {
   final EdgeInsets bodyPadding;
 
   /// The actions to build at the bottom of the callout body.
-  final CalloutActionBuilder actionBuilder;
+  final CalloutActionBuilder? actionBuilder;
 
   /// Tapping on the skrim dismisses the flow when `true`.
   final bool dismissibleSkrim;
@@ -151,6 +152,9 @@ class HotspotProvider extends StatefulWidget {
 
 class HotspotProviderState extends State<HotspotProvider>
     with TickerProviderStateMixin {
+  CalloutActionBuilder get actionBuilder =>
+      widget.actionBuilder ?? (_, c) => HotspotActionBuilder(c);
+
   final _targets = <HotspotTargetState>[];
 
   var _flow = '';
@@ -392,7 +396,7 @@ class HotspotProviderState extends State<HotspotProvider>
                               ),
 
                               /// Callout controls
-                              widget.actionBuilder(
+                              actionBuilder(
                                 context,
                                 CalloutActionController(
                                   dismiss: dismiss,

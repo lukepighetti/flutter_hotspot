@@ -1,15 +1,16 @@
 name: hotspot
 description: Easy product tours
-version: 0.0.2
+version: 0.1.0
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.4.3 <4.0.0"
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  provider: ^6.0.5
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:

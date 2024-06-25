@@ -16,11 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HotspotProvider(
-        actionBuilder: (context, controller) =>
-            HotspotActionBuilder(controller),
+      home: const HotspotProvider(
         color: Colors.white,
-        child: const MyHomePage(title: 'Hotspot Demo Home Page'),
+        child: MyHomePage(title: 'Hotspot Demo Home Page'),
       ),
     );
   }
