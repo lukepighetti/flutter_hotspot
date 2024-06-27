@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hotspot/hotspot.dart';
 import 'package:provider/provider.dart';
@@ -173,6 +175,8 @@ class HotspotProviderState extends State<HotspotProvider>
   /// focus to close the keyboard, and after the tour is done we
   /// put the focus back where it was.
   FocusNode? _lastFocusNode;
+  
+  final _flowCompleter = Completer();
 
   /// Convenience getter for the current flow sorted by order.
   List<HotspotTargetState> get currentFlow =>
@@ -180,7 +184,7 @@ class HotspotProviderState extends State<HotspotProvider>
         ..sort((a, b) => a.widget.order.compareTo(b.widget.order));
 
   /// Initiate a hotspot flow
-  void startFlow([String flow = 'main']) {
+  Future<void> startFlow([String flow = 'main']) async {
     /// Dismiss keyboard if open
     _lastFocusNode = FocusManager.instance.primaryFocus;
     _lastFocusNode?.unfocus();
@@ -200,6 +204,8 @@ class HotspotProviderState extends State<HotspotProvider>
         _visible = true;
       }
     });
+    
+    await _flowCompleter.future;
   }
 
   /// Called when tapping the next button.
@@ -233,6 +239,8 @@ class HotspotProviderState extends State<HotspotProvider>
 
     setState(() => _visible = false);
 
+    _flowCompleter.complete();
+    
     /// Put the focus back where it was if we
     /// have a previously-saved focus node.
     _lastFocusNode?.requestFocus();
