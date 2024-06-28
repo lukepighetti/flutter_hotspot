@@ -176,7 +176,7 @@ class HotspotProviderState extends State<HotspotProvider>
   /// put the focus back where it was.
   FocusNode? _lastFocusNode;
   
-  final _flowCompleter = Completer();
+  Completer? _flowCompleter;
 
   /// Convenience getter for the current flow sorted by order.
   List<HotspotTargetState> get currentFlow =>
@@ -204,8 +204,12 @@ class HotspotProviderState extends State<HotspotProvider>
         _visible = true;
       }
     });
-    
-    await _flowCompleter.future;
+
+    final flowCompleter = Completer();
+
+    _flowCompleter = flowCompleter;
+
+    await flowCompleter.future;
   }
 
   /// Called when tapping the next button.
@@ -239,7 +243,7 @@ class HotspotProviderState extends State<HotspotProvider>
 
     setState(() => _visible = false);
 
-    _flowCompleter.complete();
+    _flowCompleter?.complete();
     
     /// Put the focus back where it was if we
     /// have a previously-saved focus node.
